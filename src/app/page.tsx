@@ -1,113 +1,86 @@
-import Image from 'next/image'
+'use client'
+import SliderItem from "@/components/SliderItem";
+import {useEffect, useRef, useState} from "react";
 
+const items = [
+    {
+        text: 'DiscipleMaker servers asa a tool to help you grow, learn, and connect with your Disciple.',
+        src: '/slide1.png'
+    },
+    {text: 'Did you know that XX.XXX.XXX people from all over the word are in our network?', src: '/slide2.png'},
+    {
+        text: '9.5 out of every 10 Disciples say that they have grown in their journey with Jesus though Discipling.',
+        src: '/slide3.png'
+    }
+]
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    // const intersectionsMap = useRef(new Map<number, number>)
+    const [currentSlide, setCurrentSlide] = useState(0)
+    const wrapperRef = useRef<HTMLDivElement>(null);
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+    const handleSlide = (index: number) => {
+        wrapperRef.current?.children[index].scrollIntoView({behavior: "smooth"})
+    }
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+    useEffect(() => {
+        const wrapper = wrapperRef.current
+        if (!wrapper) {
+            return
+        }
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+        //holds the item index with the current intersection ratio
+        const intersectionsMap = new Map<number, number>()
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
+        function setCurrentSlideToIndexWithMostIntersectionRatio() {
+            if (intersectionsMap.size === 0) {
+                // when there is no element, simply set 0
+                setCurrentSlide(0)
+                return
+            }
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+            // we know there are items, we pick the one with most intersection ratio (the one most visible)
+            const intersectionsArray = Array.from(intersectionsMap.entries())
+            const sorted = intersectionsArray.sort((a, b) => b[1] - a[1])
+            const mostVisible = sorted[0];
+            setCurrentSlide(mostVisible[0])
+        }
+
+        // tracks intersection ratio changes to several elements, to know which one has the highest value
+        const observer = new IntersectionObserver(changedEntries => {
+            // for each changed entry, replace the index-intersectionRatio value
+            changedEntries.forEach(entry => {
+                const index = Number(entry.target.getAttribute('data-item-index'))
+                intersectionsMap.set(index, entry.intersectionRatio)
+            })
+
+            setCurrentSlideToIndexWithMostIntersectionRatio();
+        }, {threshold: [0, .1, .9, 1]})
+
+        // observe each child of the component, to track when their intersection ratio changes
+        for (let i = 0; i < wrapper.childElementCount; i++) {
+            observer.observe(wrapper.children[i])
+        }
+    }, [])
+
+    return (
+        <main className="flex min-h-screen flex-col items-center justify-between">
+            <div className="relative w-full flex snap-x overflow-x-auto snap-mandatory snap-x"
+                 ref={wrapperRef}>
+                {items.map((item, index) => (
+                    <div key={index} className="w-full min-w-full snap-center" data-item-index={index}>
+                        <SliderItem text={item.text} src={item.src} className="pt-20"/>
+                    </div>
+                ))}
+            </div>
+            <div className="bg-[#008c93] h-full flex flex-col flex-1 w-full">
+                <div className='flex gap-4 justify-center'>
+                    {items.map((item, index) => (
+                        <button key={index} onClick={() => handleSlide(index)}
+                                className={`rounded-full w-4 h-4 border border-2 border-white ${currentSlide === index ? 'bg-white' : 'bg-transparent'}`}/>
+                    ))}
+                </div>
+                <button className='bg-[#d19f2a] p-4 w-fit rounded-lg m-auto'>GET STARTED!</button>
+            </div>
+        </main>
+    )
 }
