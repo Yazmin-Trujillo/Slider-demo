@@ -4,12 +4,12 @@ import {useEffect, useRef, useState} from "react";
 
 const items = [
     {
-        text: 'DiscipleMaker servers asa a tool to help you grow, learn, and connect with your Disciple.',
+        text: 'DiscipleMaker serves as a tool to help you grow, learn, and connect with your Disciples.',
         src: '/slide1.png'
     },
-    {text: 'Did you know that XX.XXX.XXX people from all over the word are in our network?', src: '/slide2.png'},
+    {text: 'Did you know that XX.XXX.XXX people from all over the world are in our network?', src: '/slide2.png'},
     {
-        text: '9.5 out of every 10 Disciples say that they have grown in their journey with Jesus though Discipling.',
+        text: '9.5 out of every 10 Disciples say that they have grown in their journey with Jesus through Discipling.',
         src: '/slide3.png'
     }
 ]
@@ -72,14 +72,15 @@ export default function Home() {
                     </div>
                 ))}
             </div>
-            <div className="bg-[#008c93] h-full flex flex-col flex-1 w-full">
+            <div className="bg-[#008c93] h-full flex flex-col flex-1 w-full items-center gap-2">
+                <div className='text-white font-medium text-xs'>SWIPE TO LEARN MORE</div>
                 <div className='flex gap-4 justify-center'>
                     {items.map((item, index) => (
                         <button key={index} onClick={() => handleSlide(index)}
                                 className={`rounded-full w-4 h-4 border border-2 border-white ${currentSlide === index ? 'bg-white' : 'bg-transparent'}`}/>
                     ))}
                 </div>
-                <button className='bg-[#d19f2a] p-4 w-fit rounded-lg m-auto'>GET STARTED!</button>
+                    <button className='bg-[#d19f2a] p-4 w-fit rounded-lg m-auto'>GET STARTED!</button>
             </div>
         </main>
     )
