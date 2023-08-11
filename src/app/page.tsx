@@ -64,7 +64,7 @@ export default function Home() {
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-between">
-            <div className="relative w-full flex snap-x overflow-x-auto snap-mandatory snap-x"
+            <div className="relative w-full flex snap-x overflow-x-auto snap-mandatory snap-x no-scrollbar"
                  ref={wrapperRef}>
                 {items.map((item, index) => (
                     <div key={index} className="w-full min-w-full snap-center" data-item-index={index}>
@@ -72,7 +72,8 @@ export default function Home() {
                     </div>
                 ))}
             </div>
-            <div className="bg-[#008c93] h-full flex flex-col flex-1 w-full items-center gap-2">
+            <div className="bg-[#008c93] h-full flex flex-col flex-1 w-full items-center gap-16">
+                <div className='flex flex-col gap-2'>
                 <div className='text-white font-medium text-xs'>SWIPE TO LEARN MORE</div>
                 <div className='flex gap-4 justify-center'>
                     {items.map((item, index) => (
@@ -80,7 +81,11 @@ export default function Home() {
                                 className={`rounded-full w-4 h-4 border border-2 border-white ${currentSlide === index ? 'bg-white' : 'bg-transparent'}`}/>
                     ))}
                 </div>
-                    <button className='bg-[#d19f2a] p-4 w-fit rounded-lg m-auto'>GET STARTED!</button>
+                </div>
+                <div className='text-center flex flex-col gap-5'>
+                    <button className='bg-[#d19f2a] py-4 px-14 w-fit rounded-full text-white font-semibold tracking-widest'>GET STARTED!</button>
+                    <div className='text-white font-semibold tracking-widest'>LOG IN</div>
+                </div>
             </div>
         </main>
     )
